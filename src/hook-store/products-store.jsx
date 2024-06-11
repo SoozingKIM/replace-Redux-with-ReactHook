@@ -5,9 +5,9 @@ export function configureStore() {
     TOGGLE_FAV: (cur, productId) => {
       const prodIndex = cur.products.findIndex((p) => p.id === productId);
       const newFavStatus = !cur.products[prodIndex].isFavorite;
-      const updatedProducts = [...cur];
+      const updatedProducts = [...cur.products];
       updatedProducts[prodIndex] = {
-        ...cur[prodIndex],
+        ...cur.products[prodIndex],
         isFavorite: newFavStatus,
       };
       return { products: updatedProducts };
