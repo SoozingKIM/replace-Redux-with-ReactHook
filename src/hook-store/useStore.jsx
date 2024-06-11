@@ -4,7 +4,7 @@ let globalState = {};
 let listeners = [];
 let actions = {};
 
-export function useStore() {
+export function useStore(shouldListen = true) {
   const setState = useState(globalState)[1];
 
   const dispatch = (actionIdentifier, payload) => {
@@ -20,7 +20,9 @@ export function useStore() {
     listeners.push(setState);
 
     return () => {
-      listeners = listeners.filter((li) => li !== setState);
+      if (shouldListen) {
+        listeners = listeners.filter((li) => li !== setState);
+      }
     };
   }, [setState]);
 
